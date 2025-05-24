@@ -61,3 +61,15 @@ button:active {
   align-items: righ;
 }
 
+.user-link {
+  color: #1d6fa5;        /* nice blue */
+  text-decoration: none; /* remove underline */
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.user-link:hover {
+  color:#f58ba7;        /* darker blue on hover */
+  text-decoration: none; /* underline on hover */
+}
+

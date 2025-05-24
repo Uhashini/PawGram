@@ -4,10 +4,8 @@ import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import "./PostFeed.css"
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { auth } from "../../firebase";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { arrayRemove } from "firebase/firestore";
-
+import { Link } from "react-router-dom";
 
 const PostFeed = () => {
   const [posts, setPosts] = useState([]);
@@ -70,7 +68,12 @@ const handleComment = async (postId) => {
       {posts.length === 0 && <p>No posts yet.</p>}
       {posts.map(post => (
         <div key={post.id} className="post">
-          <p className="userid"><strong>User: {post.userId}</strong></p>
+          <p className="userid">
+            <strong>User : <Link to={`/profile/${post.userId}`} className="user-link">
+              {post.userId}
+              </Link>
+            </strong>
+          </p>
           <p>{post.createdAt?.toDate().toLocaleString()}</p>
           <img src={post.imageUrl} alt={post.caption} className="post-image" />
            {/* You can replace userId with email if you save it */}

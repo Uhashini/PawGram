@@ -7,6 +7,8 @@ import PrivateRoute from "./components/Auth/PrivateRoute";
 import { useAuth } from "./components/Auth/AuthContext";
 import CreatePost from "./components/Post/CreatePost";
 import PostFeed from "./components/Post/PostFeed";
+import UserProfile from "./components/User/UserProfile";
+
 
 const Home = () => {
   const { currentUser, logout } = useAuth();
@@ -40,6 +42,7 @@ function App() {
         />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile/:userId" element={<UserProfile />} />
       </Routes>
     </Router>
   );
