@@ -6,6 +6,7 @@ import Login from "./components/Auth/Login";
 import PrivateRoute from "./components/Auth/PrivateRoute";
 import { useAuth } from "./components/Auth/AuthContext";
 import CreatePost from "./components/Post/CreatePost";
+import PostFeed from "./components/Post/PostFeed";
 
 const Home = () => {
   const { currentUser, logout } = useAuth();
@@ -19,7 +20,7 @@ const Home = () => {
       </header>
       <h1>Welcome to Pawgram! You are logged in.</h1>
       <p>Hello, {currentUser?.email}</p>
-    
+      <PostFeed/>
       <center><CreatePost /></center>
     </div>
   );

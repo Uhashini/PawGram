@@ -1,0 +1,50 @@
+.post-feed {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+.post {
+  background:#f7e5e5;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  padding: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.post-image {
+  width: 100%;          /* Full width of post container */
+  height: 300px;        /* Fixed height for uniformity */
+  object-fit: cover;    /* Crop & fill nicely */
+  border-radius: 10px;
+  display: block;       /* Removes bottom whitespace */
+  margin-bottom: 10px;  /* Space below image */
+}
+
+.post p {
+  margin: 5px ;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  color: #8b78ca;
+}
+
+.post p strong {
+  color: rgb(18, 18, 18);
+}
+
+.comments {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+button {
+  transition: transform 0.2s ease;
+}
+
+button:active {
+  transform: scale(1.2);
+}
+

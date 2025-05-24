@@ -49,6 +49,9 @@ const CreatePost = () => {
               caption: caption,
               userId: auth.currentUser.uid,
               createdAt: serverTimestamp(),
+              imageUrl: downloadURL,
+              likes: [],
+              comments: [],
             });
 
             setProgress(0);
