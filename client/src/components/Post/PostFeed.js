@@ -6,6 +6,7 @@ import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { auth } from "../../firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { arrayRemove } from "firebase/firestore";
 
 
 const PostFeed = () => {
@@ -32,17 +33,24 @@ const handleCommentChange = (postId, value) => {
   setCommentInput(prev => ({ ...prev, [postId]: value }));
 };
 
-const handleLike = async (postId) => {
+
+const handleLike = async (postId, currentLikes) => {
   const postRef = doc(db, "posts", postId);
-  const post = posts.find(p => p.id === postId);
   const userEmail = auth.currentUser.email;
 
-  if (!post.likes?.includes(userEmail)) {
+  if (currentLikes && currentLikes.includes(userEmail)) {
+    // User already liked — remove their like (unlike)
+    await updateDoc(postRef, {
+      likes: arrayRemove(userEmail),
+    });
+  } else {
+    // User hasn't liked — add their like
     await updateDoc(postRef, {
       likes: arrayUnion(userEmail),
     });
   }
 };
+
 
 
 const handleComment = async (postId) => {
@@ -66,20 +74,20 @@ const handleComment = async (postId) => {
           <p>{post.createdAt?.toDate().toLocaleString()}</p>
           <img src={post.imageUrl} alt={post.caption} className="post-image" />
            {/* You can replace userId with email if you save it */}
-          <p>Caption: {post.caption}</p>
-          <p>Likes: {post.likes?.length || 0}</p>
-          <button
-  onClick={() => handleLike(post.id)}
-  style={{
-    background: "none",
-    border: "none",
-    cursor: "pointer",
-    fontSize: "24px",
-    color: post.likes?.includes(auth.currentUser.email) ? "red" : "gray",
-  }}
->
-  <FontAwesomeIcon icon={faHeart} />
+          <p>
+            <span className="caption">Caption: </span>
+            {post.caption}
+          </p>
+
+          <p>
+            <span className="caption">Likes: </span>
+            {post.likes?.length || 0}
+          </p>
+          
+          <button onClick={() => handleLike(post.id, post.likes)}> 
+  {post.likes?.includes(auth.currentUser.email) ? "❤️ Unlike" : "🤍 Like"}
 </button>
+
 
           <input
             type="text"

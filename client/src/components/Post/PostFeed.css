@@ -48,3 +48,16 @@ button:active {
   transform: scale(1.2);
 }
 
+.caption{
+  color: black;
+  font-size: large;
+  font-weight: 600;
+}
+
+
+.like-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: righ;
+}
+
