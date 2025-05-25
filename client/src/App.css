@@ -84,3 +84,21 @@
 .home-container > div {
   margin-top: 1rem;
 }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-profile-link {
+  display: inline-block;
+}
+
+.user-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
