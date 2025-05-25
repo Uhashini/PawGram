@@ -2,7 +2,7 @@
   max-width: 500px;
   margin: 2rem auto;
   padding: 20px;
-  background: #fff;
+  background: url("/public/pawprint_bg.png");
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0,0,0,0.1);
   text-align: center;
@@ -31,4 +31,92 @@
 
 .follow-btn:hover {
   background-color: #b83d3d;
+}
+
+.followers-list ul,
+.following-list ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.followers-list li,
+.following-list li {
+  margin-bottom: 5px;
+}
+
+.followers-list a,
+.following-list a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.followers-list a:hover,
+.following-list a:hover {
+  text-decoration: underline;
+}
+
+.follower-link {
+  color: #007bff; /* Bootstrap-like blue */
+  text-decoration: none;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.follower-link:hover {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+.user-posts {
+  margin-top: 30px;
+}
+
+.profile-post {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.profile-post-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.edit-section label {
+  display: block;
+  margin: 10px 0;
+}
+
+.edit-section textarea,
+.edit-section input {
+  width: 100%;
+  padding: 6px;
+  margin-top: 4px;
+  border-radius: 4px;
+}
+
+.edit-section button {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
 }

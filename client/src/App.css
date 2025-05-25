@@ -1,7 +1,7 @@
 /* App.css */
 
 .App {
-  background: url("E:\pawgram\client\public\pawprint_bg.png");
+  background: url("/public/pawprint_bg.png");
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f7f8fa;
