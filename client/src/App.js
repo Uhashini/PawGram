@@ -47,49 +47,51 @@ const Home = () => {
 }, [searchQuery]);
 
 
-  return (
-    <div className="home-container">
-      <header className="App-header">
-        <img src="/logo.png" alt="Pawgram Logo" className="App-logo" />
-          <div className="header-right">
-            <Link to={`/profile/${currentUser?.email}`} className="user-profile-link">
-            <img src="/default-user-icon.png" alt="Profile" className="user-icon" />
-            </Link>
-            <button onClick={logout} className="logout-button">Logout</button>
-          </div>
-      </header>
+return (
+  <div className="home-container">
+    <header className="App-header">
+      <img src="/logo.png" alt="Pawgram Logo" className="App-logo" />
 
-      <h1>Welcome to Pawgram! You are logged in.</h1>
-      <p>Hello, {currentUser?.email}</p>
+      <div className="search-section-header">
+        <input
+          type="text"
+          placeholder="Search users..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input"
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
 
-      <div className="search-section">
-  <input
-    type="text"
-    placeholder="Search users..."
-    value={searchQuery}
-    onChange={(e) => setSearchQuery(e.target.value)}
-    className="search-input"
-  />
-  <button onClick={handleSearch}>Search</button>
+      <div className="header-right">
+        <Link to={`/profile/${currentUser?.email}`} className="user-profile-link">
+          <img src="/default-user-icon.png" alt="Profile" className="user-icon" title="Profile"/>
+        </Link>
+        <button onClick={logout} className="logout-button">Logout</button>
+      </div>
 
-  {searchQuery && searchResults.length > 0 && (
-    <ul className="dropdown-results">
-      {searchResults.map((user) => (
-        <li key={user.email}>
-          <Link to={`/profile/${user.email}`}>{user.username || user.email}</Link>
-        </li>
-      ))}
-    </ul>
-  )}
-</div>
+      {searchQuery && searchResults.length > 0 && (
+        <ul className="dropdown-results">
+          {searchResults.map((user) => (
+            <li key={user.email}>
+              <Link to={`/profile/${user.email}`}>{user.username || user.email}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </header>
 
+    <h1>Welcome to Pawgram! </h1>
+    <p>Hello, {currentUser?.email}</p>
 
-      <PostFeed />
-      <center><CreatePost /></center>
-    </div>
-  );
-};
+    <PostFeed />
+    <center>
+      <div title="Post Image"><CreatePost /></div>
+    </center>
+  </div>
+);
 
+}
 
 function App() {
   return (

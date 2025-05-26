@@ -11,6 +11,9 @@
 }
 
 .App-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,6 +22,57 @@
   color: white;
   border-radius: 8px;
   flex-wrap: wrap;
+}
+
+/* Style for search input when in header */
+.search-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #282c34;
+  border-radius: 8px;
+  padding: 0.2rem 0.5rem;
+  margin-left: 1rem;
+}
+
+.search-input {
+  padding: 6px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  width: 180px;
+}
+
+.search-section-header button {
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  margin-top: 32px;
+}
+
+.search-section-header button:hover {
+  background-color: #4338ca;
+}
+
+/* Drop-down inside header */
+.dropdown-results {
+  position: absolute;
+  top: 65px; /* adjust based on your header height */
+  left: 20px;
+  width: 300px;
+  background: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 999;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .App-logo {
@@ -120,8 +174,13 @@
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+  opacity:1
 }
 
+.user-icon:hover{
+  content: "Profile";
+  opacity:0.7;
+}
 
 .search-results {
   list-style-type: none;

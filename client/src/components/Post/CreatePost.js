@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { storage, db, auth } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -10,6 +10,20 @@ const CreatePost = () => {
   const [progress, setProgress] = useState(0);
   const [showForm, setShowForm] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+
+  const fileInputRef = useRef(null);
+
+  const handleIconClick = () => {
+    // If form is visible, clicking icon again hides it and resets state
+    if (showForm) {
+      setShowForm(false);
+      setImage(null);
+      setCaption("");
+      setProgress(0);
+    } else {
+      fileInputRef.current.click(); // open file selector
+    }
+  };
 
   const handleFileChange = (e) => {
     if (e.target.files[0]) {
@@ -25,8 +39,6 @@ const CreatePost = () => {
       alert("Please select an image first!");
       return;
     }
-    console.log("User ID:", auth.currentUser?.uid);
-
 
     const storageRef = ref(storage, `posts/${auth.currentUser.uid}/${image.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
@@ -49,7 +61,6 @@ const CreatePost = () => {
               caption: caption,
               userId: auth.currentUser.uid,
               createdAt: serverTimestamp(),
-              imageUrl: downloadURL,
               likes: [],
               comments: [],
             });
@@ -57,10 +68,9 @@ const CreatePost = () => {
             setProgress(0);
             setCaption("");
             setImage(null);
-            
-            alert("Post uploaded successfully!");
+            setShowForm(false);
             setShowSuccess(true);
-            setTimeout(() => setShowSuccess(false), 3000); // hides after 3 seconds
+            setTimeout(() => setShowSuccess(false), 3000); // Hide after 3 sec
           } catch (error) {
             console.error("Error saving post: ", error);
             alert("Failed to save post.");
@@ -75,13 +85,16 @@ const CreatePost = () => {
       <input
         type="file"
         accept="image/*"
-        id="fileInput"
+        ref={fileInputRef}
         style={{ display: "none" }}
         onChange={handleFileChange}
       />
-      <label htmlFor="fileInput">
-        <img src="/upload.png" alt="Upload" className="upload-icon" />
-      </label>
+      <img
+        src="/upload.png"
+        alt="Upload"
+        className="upload-icon"
+        onClick={handleIconClick}
+      />
 
       {showForm && (
         <form onSubmit={handleSubmit} className="post-form">
@@ -91,7 +104,7 @@ const CreatePost = () => {
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
           />
-          <button type="submit">Post</button>
+          <button type="submit" disabled={!caption.trim()}>Post</button>
         </form>
       )}
 
@@ -100,8 +113,9 @@ const CreatePost = () => {
           {progress}%
         </progress>
       )}
+
       {showSuccess && (
-  <div className="success-popup">Post uploaded successfully!</div>
+        <div className="success-popup">Post uploaded successfully!</div>
       )}
     </div>
   );
