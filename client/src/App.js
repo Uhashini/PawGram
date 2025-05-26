@@ -51,16 +51,12 @@ const Home = () => {
     <div className="home-container">
       <header className="App-header">
         <img src="/logo.png" alt="Pawgram Logo" className="App-logo" />
-        
-        <div className="header-right">
-          <Link to={`/profile/${currentUser?.email}`} className="user-profile-link">
+          <div className="header-right">
+            <Link to={`/profile/${currentUser?.email}`} className="user-profile-link">
             <img src="/default-user-icon.png" alt="Profile" className="user-icon" />
-          </Link>
-
-          <button onClick={logout} className="logout-button">Logout</button>
-        </div>
-        
-        <p className="username">{currentUser?.email}</p>
+            </Link>
+            <button onClick={logout} className="logout-button">Logout</button>
+          </div>
       </header>
 
       <h1>Welcome to Pawgram! You are logged in.</h1>

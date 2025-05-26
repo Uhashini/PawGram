@@ -10,29 +10,48 @@
   margin: 0;
 }
 
-.App-logo {
-  height: 80px;
-  pointer-events: none;
-  margin-bottom: 0rem;
-  margin-left: 1rem;
-  border-radius: 5px;
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #282c34;
+  padding: 0.8rem 1.5rem;
+  color: white;
+  border-radius: 8px;
+  flex-wrap: wrap;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 10vh;
+.App-logo {
+  height: 60px;
+  border-radius: 8px;
+}
+
+.header-right {
   display: flex;
   align-items: center;
-  border-radius: 8px;
-  color: white;
-  padding: 1rem 0;
+  gap: 2rem;
 }
 
-.logout-button{
-  margin-right: 10px;
-  margin-left: 260px;
-  margin-top: 40px;
+.logout-button {
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  height: 40px; /* Match the icon height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  position: relative;
+  margin-top: 25px;
 }
+
+.logout-button:hover {
+  background-color: #4338ca;
+}
+
 
 .username{
   text-decoration-color: black;
@@ -96,8 +115,8 @@
 }
 
 .user-icon {
-  width: 35px;
-  height: 35px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
@@ -161,3 +180,24 @@
   background-color: #f0f0f0;
 }
 
+/* Responsive header */
+@media (max-width: 600px) {
+  .App-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .logout-button {
+    padding: 0.4rem 0.8rem;
+  }
+
+  .App-logo {
+    height: 50px;
+  }
+}
