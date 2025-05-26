@@ -102,3 +102,62 @@
   object-fit: cover;
   cursor: pointer;
 }
+
+
+.search-results {
+  list-style-type: none;
+  padding: 0;
+}
+
+.search-results li {
+  margin: 0.3rem 0;
+}
+
+.search-results a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.search-section {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.dropdown-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-results li {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-results li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+.dropdown-results li:hover {
+  background-color: #f0f0f0;
+}
+

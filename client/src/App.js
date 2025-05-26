@@ -9,10 +9,43 @@ import CreatePost from "./components/Post/CreatePost";
 import PostFeed from "./components/Post/PostFeed";
 import UserProfile from "./components/User/UserProfile";
 import { Link } from "react-router-dom";
+import {useState, useEffect } from "react";
+import {collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase";
 
 
 const Home = () => {
   const { currentUser, logout } = useAuth();
+  const [searchQuery, setSearchQuery]=useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  
+  const handleSearch = async () => {
+    const usersRef = collection(db, "users");
+    const snapshot = await getDocs(usersRef);
+
+    const matches = snapshot.docs
+      .map(doc => doc.data())
+      .filter(
+        user =>
+          user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.username?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+    setSearchResults(matches);  
+  };
+
+  useEffect(() => {
+  const delayDebounce = setTimeout(() => {
+    if (searchQuery.trim() !== "") {
+      handleSearch();
+    } else {
+      setSearchResults([]);
+    }
+  }, 300); // debounce input for smoother experience
+
+  return () => clearTimeout(delayDebounce);
+}, [searchQuery]);
+
 
   return (
     <div className="home-container">
@@ -32,6 +65,29 @@ const Home = () => {
 
       <h1>Welcome to Pawgram! You are logged in.</h1>
       <p>Hello, {currentUser?.email}</p>
+
+      <div className="search-section">
+  <input
+    type="text"
+    placeholder="Search users..."
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+    className="search-input"
+  />
+  <button onClick={handleSearch}>Search</button>
+
+  {searchQuery && searchResults.length > 0 && (
+    <ul className="dropdown-results">
+      {searchResults.map((user) => (
+        <li key={user.email}>
+          <Link to={`/profile/${user.email}`}>{user.username || user.email}</Link>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
+
       <PostFeed />
       <center><CreatePost /></center>
     </div>
